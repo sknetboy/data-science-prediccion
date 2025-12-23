@@ -44,7 +44,7 @@ Invoke-RestMethod -Uri http://127.0.0.1:8001/predict -Method Post -ContentType a
 ```
 
 ### 3) Levantar el backend principal (Java + Spring Boot)
-- Requisitos: Java 17 y Maven instalados.
+- Requisitos: Java 21 y Maven instalados.
 - En una terminal:
 ```
 mvn -f backend/pom.xml spring-boot:run
