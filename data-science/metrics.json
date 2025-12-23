@@ -1,0 +1,14 @@
+{
+  "accuracy": 1.0,
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1": 1.0,
+  "best_params": {
+    "classifier__class_weight": null,
+    "classifier__max_depth": null,
+    "classifier__min_samples_leaf": 1,
+    "classifier__n_estimators": 100
+  },
+  "training_date": "2025-12-23T02:30:26.776107",
+  "version": "1.0.20251223023026"
+}

@@ -1,0 +1,5 @@
+server:
+  port: 8080
+prediction:
+  service:
+    base-url: http://localhost:8001
