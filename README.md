@@ -14,7 +14,7 @@ ChurnInsight es un proyecto listo para ejecutar que entrena un modelo de churn y
   - Python 3.13 o superior.
   - Navegador y conexión a internet.
   - Para el backend: Java 21 y Maven (opcional si sólo quieres probar el microservicio).
->>>>>>> b21d8627984b02cb389099d4783e47b7101b5c6b
+>>>>>>> b21d8
 
 ### 1) Entrenar el modelo (Data Science)
 - Abre una terminal (PowerShell en Windows) y ejecuta:
