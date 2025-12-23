@@ -6,9 +6,15 @@ ChurnInsight es un proyecto listo para ejecutar que entrena un modelo de churn y
 ## Guía rápida para principiantes (paso a paso)
 - Objetivo: entrenar el modelo, levantar el servicio de predicción y el backend.
 - Requisitos mínimos:
+<<<<<<< HEAD
   - Python 3.11 o superior (Recomendado: 3.13).
   - Navegador y conexión a internet.
   - Para el backend: Java 21 y Maven 3.9.12 (opcional si sólo quieres probar el microservicio).
+=======
+  - Python 3.13 o superior.
+  - Navegador y conexión a internet.
+  - Para el backend: Java 21 y Maven (opcional si sólo quieres probar el microservicio).
+>>>>>>> b21d8627984b02cb389099d4783e47b7101b5c6b
 
 ### 1) Entrenar el modelo (Data Science)
 - Abre una terminal (PowerShell en Windows) y ejecuta:
@@ -44,7 +50,11 @@ Invoke-RestMethod -Uri http://127.0.0.1:8001/predict -Method Post -ContentType a
 ```
 
 ### 3) Levantar el backend principal (Java + Spring Boot)
+<<<<<<< HEAD
 - Requisitos: Java 21 y Maven 3.9.12 instalados.
+=======
+- Requisitos: Java 21 y Maven instalados.
+>>>>>>> b21d8627984b02cb389099d4783e47b7101b5c6b
 - En una terminal:
 ```
 mvn -f backend/pom.xml spring-boot:run
