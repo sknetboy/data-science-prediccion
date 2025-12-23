@@ -6,9 +6,9 @@ ChurnInsight es un proyecto listo para ejecutar que entrena un modelo de churn y
 ## Guía rápida para principiantes (paso a paso)
 - Objetivo: entrenar el modelo, levantar el servicio de predicción y el backend.
 - Requisitos mínimos:
-  - Python 3.11 o superior.
+  - Python 3.11 o superior (Recomendado: 3.13).
   - Navegador y conexión a internet.
-  - Para el backend: Java 17 y Maven (opcional si sólo quieres probar el microservicio).
+  - Para el backend: Java 21 y Maven 3.9.12 (opcional si sólo quieres probar el microservicio).
 
 ### 1) Entrenar el modelo (Data Science)
 - Abre una terminal (PowerShell en Windows) y ejecuta:
@@ -44,7 +44,7 @@ Invoke-RestMethod -Uri http://127.0.0.1:8001/predict -Method Post -ContentType a
 ```
 
 ### 3) Levantar el backend principal (Java + Spring Boot)
-- Requisitos: Java 17 y Maven instalados.
+- Requisitos: Java 21 y Maven 3.9.12 instalados.
 - En una terminal:
 ```
 mvn -f backend/pom.xml spring-boot:run
@@ -61,11 +61,12 @@ Invoke-RestMethod -Uri http://localhost:8080/predict -Method Post -ContentType a
 docker compose up --build
 ```
 - Backend: `http://localhost:8080`  |  Microservicio: `http://localhost:8001`
+- **Nota:** Las imágenes de Docker utilizan **Java 21 (Eclipse Temurin)** y **Python 3.13**.
 
 ### Problemas comunes y soluciones
 - "uvicorn no se reconoce": instala dependencias con `pip install -r prediction-service/requirements.txt` o usa `python -m uvicorn ...`.
 - Error de importación en `app.main`: usa la Opción A (entrar a la carpeta `prediction-service`) o la Opción B con `PYTHONPATH`.
-- Maven no se reconoce: instala Maven y Java 17, o usa Docker Compose.
+- Maven no se reconoce: instala Maven 3.9.12 y Java 21, o usa el wrapper `./mvnw` en la carpeta `backend`, o Docker Compose.
 
 ## Arquitectura
 - Cliente → `backend` (Java) → `prediction-service` (Python FastAPI) → `model.joblib`
@@ -87,7 +88,7 @@ docker compose up --build
 
 ## Microservicio de Predicción (FastAPI)
 - Ubicación: `prediction-service/`
-- Dependencias en `requirements.txt`.
+- Dependencias en `requirements.txt` (compatible con Python 3.13).
 - Arranque local:
   - `pip install -r prediction-service/requirements.txt`
   - Opción A: `cd prediction-service && python -m uvicorn app.main:app --host 127.0.0.1 --port 8001`
@@ -108,7 +109,8 @@ El servicio carga `model.joblib` al inicio y, si no existe, entrena automáticam
 
 ## Back-end Principal (Java + Spring Boot)
 - Ubicación: `backend/`
-- Java 17+, Spring Boot WebFlux.
+- **Java 21**, Spring Boot WebFlux.
+- **Maven 3.9.12** (enforced).
 - Arranque local:
   - `mvn -f backend/pom.xml spring-boot:run`
 - Endpoint:
@@ -130,8 +132,8 @@ El servicio carga `model.joblib` al inicio y, si no existe, entrena automáticam
 - Levantar todo el stack:
   - `docker compose up --build`
 - Servicios:
-  - `prediction-service` en `http://localhost:8001`
-  - `backend` en `http://localhost:8080`
+  - `prediction-service` en `http://localhost:8001` (Python 3.13)
+  - `backend` en `http://localhost:8080` (Java 21)
 
 ### Healthchecks en Compose
 - Los servicios incluyen `healthcheck`:
@@ -162,7 +164,7 @@ El servicio carga `model.joblib` al inicio y, si no existe, entrena automáticam
 
 ## Prompts por Módulo
 - Data Science:
-  - "Genera un dataset sintético de churn y entrena un modelo binario con `LogisticRegression` usando `ColumnTransformer`. Exporta a `model.joblib` y reporta Accuracy, Precision, Recall y F1."
+  - "Genera un dataset sintético de churn y entrena un modelo binario con `RandomForestClassifier` usando `ColumnTransformer` y `StandardScaler`. Exporta a `model.joblib` y reporta Accuracy, Precision, Recall y F1."
 - Microservicio de Predicción (FastAPI):
   - "Crea un servicio FastAPI que cargue `model.joblib` al iniciar y exponga `POST /predict` con validación de tipos y respuesta `{prevision, probabilidad}`; añade `GET /stats`."
 - Backend Principal (Spring Boot):
